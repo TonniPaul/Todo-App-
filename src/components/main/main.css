@@ -36,7 +36,6 @@
 .completed {
    color: green;
    border-radius: 50%;
-   /* border: 1px solid green; */
    padding: 5px;
 }
 
@@ -48,14 +47,17 @@
 
 @media (max-width: 768px) {
    .main_container {
-      width: 80%;
+      width: 90%;
    }
    .add_todo_cont {
       flex-direction: column;
       justify-content: flex-start;
+      gap: 5px;
    }
    .btn {
-      display: block;
-      justify-self: flex-start;
+      align-self: flex-end;
+   }
+   .todo_input {
+      border: 1px solid var(--green );
    }
 }
