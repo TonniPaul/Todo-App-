@@ -29,27 +29,27 @@ const Main = () => {
           id="todo_item"
           value={inputValue}
           onChange={getInputValue}
-          placeholder="Add New Task"
+          placeholder="Input Task"
           className="todo_input"
         />
         <button type="submit" className="btn">
-          Add Todo
+          Add Task
         </button>
       </form>
       {myTodoItems.length > 0 && (
         <div className="flex margin column primary_container">
           {myTodoItems.map((todo) => (
             <div key={todo.id} className="primary_container todo_items">
-              <div>{todo.title}</div>
-              <div>
-                <i className="fa-solid fa-pen"></i>
-              </div>
-              <div>
+              <p className="task">{todo.title}</p>
+              <p className="task">
+                <i className="fa-solid fa-pen pointer edit"></i>
+              </p>
+              <p className="task">
                 <i className="fa-solid fa-check pointer completed"></i>
-              </div>
-              <div>
+              </p>
+              <p className="task">
                 <i className="fa-solid fa-trash-can pointer delete"></i>
-              </div>
+              </p>
             </div>
           ))}
         </div>

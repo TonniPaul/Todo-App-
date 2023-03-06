@@ -17,7 +17,6 @@
    outline: none;
    border: none;
    padding: 10px;
-   text-transform: capitalize;
 }
 
 .btn {
@@ -25,10 +24,10 @@
    border: none;
    background: var(--green);
    border-radius: 5px;
+   width: 20%;
 }
 
 .todo_items {
-   margin-top: 20px;
    display: grid;
    grid-template-columns: 1fr auto auto auto;
    gap: 10px;
@@ -41,10 +40,22 @@
    padding: 5px;
 }
 
+.edit {
+   color: var(--blue);
+}
+
+input::placeholder {
+   color: #ccc;
+}
+
 .delete {
    color: red;
    padding: 5px;
 
+}
+
+.task {
+   text-transform: capitalize;
 }
 
 @media (max-width: 768px) {
@@ -58,6 +69,7 @@
    }
    .btn {
       align-self: flex-end;
+      width: 30%;
    }
    .todo_input {
       border: 1px solid var(--green );
