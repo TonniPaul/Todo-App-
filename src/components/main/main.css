@@ -17,6 +17,7 @@
    outline: none;
    border: none;
    padding: 10px;
+   text-transform: capitalize;
 }
 
 .btn {
@@ -29,9 +30,10 @@
 .todo_items {
    margin-top: 20px;
    display: grid;
-   grid-template-columns: 1fr auto auto;
-   gap: 20px;
+   grid-template-columns: 1fr auto auto auto;
+   gap: 10px;
    width: 100%;
+   align-items: center;
 }
 .completed {
    color: green;
