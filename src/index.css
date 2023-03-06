@@ -1,6 +1,27 @@
+@import url('https://fonts.googleapis.com/css2?family=Great+Vibes&family=Russo+One&display=swap');
+
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
   max-width: 100%;
+  font-family: 'Russo One', sans-serif;
+
+}
+:root {
+  --peach: #f7dfd7;
+  --orange: #ff7461;
+  --green: #b2d198;
+  --white: #fff;
+  --grey: #f6fafb;
+}
+
+.flex {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.pointer {
+  cursor: pointer;
 }
