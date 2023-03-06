@@ -1,7 +1,6 @@
 .header_cont {
    background: var(--grey);
-   padding: 32px;
-   padding-bottom: 5rem;
+   padding: 5rem;
    color: var(--green);
    text-align: center;
 }

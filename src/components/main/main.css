@@ -4,7 +4,7 @@
    margin-top: 20px;
 }
 
-.add_todo_cont {
+.primary_cont {
    width: 100%;
    gap: 20px;
    padding: 10px;
@@ -49,7 +49,7 @@
    .main_container {
       width: 90%;
    }
-   .add_todo_cont {
+   .primary_cont {
       flex-direction: column;
       justify-content: flex-start;
       gap: 5px;
