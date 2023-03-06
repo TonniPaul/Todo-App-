@@ -1,26 +1,13 @@
-import { useState } from "react";
 import "./main.css";
 
 const Main = () => {
-  const [inputValue, setInputValue] = useState();
-
-  const getInput = (e) => {
-    setInputValue(e.target.value);
-  };
-
-  const handleInput = (e) => {
-    e.preventDefault();
-    console.log(inputValue);
-  };
   return (
     <main className="main_container">
-      <form className="flex primary_cont" onSubmit={handleInput}>
+      <form className="flex primary_container">
         <input
           type="text"
           name="todo_item"
           id="todo_item"
-          value={inputValue}
-          onChange={getInput}
           placeholder="Your todo goes here"
           className="todo_input"
         />
@@ -29,9 +16,9 @@ const Main = () => {
         </button>
       </form>
 
-      <div className="flex margin-top primary_cont">
-        <div className="primary_cont todo_items">
-          <div> {inputValue} </div>
+      <div className="flex margin-top primary_container">
+        <div className="primary_container todo_items">
+          <div> Complete my task </div>
           <div>
             <i className="fa-solid fa-check pointer completed"></i>
           </div>
