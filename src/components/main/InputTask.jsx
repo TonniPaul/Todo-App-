@@ -9,7 +9,10 @@ const InputTask = ({ onSubmit }) => {
   };
 
   const handleSubmit = (e) => {
-    e.preventDefault();
+     e.preventDefault();
+     if (!inputValue || !inputValue.trim()) {
+       return;
+     }
     const newTask = {
       id: uuid(),
       title: inputValue,
