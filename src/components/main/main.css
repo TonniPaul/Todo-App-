@@ -21,10 +21,15 @@
 
 .btn {
    padding: 10px;
-   border: none;
+   border: 1px solid var(--green);
    background: var(--green);
    border-radius: 5px;
    width: 20%;
+   transition: all .7s ease-in-out;
+}
+
+.btn:hover {
+   background: var(--white);
 }
 
 .todo_items {
@@ -34,6 +39,7 @@
    width: 100%;
    align-items: center;
 }
+
 .completed {
    color: green;
    border-radius: 50%;
@@ -62,16 +68,19 @@ input::placeholder {
    .main_container {
       width: 90%;
    }
+
    .primary_container {
       flex-direction: column;
       justify-content: flex-start;
       gap: 5px;
    }
+
    .btn {
       align-self: flex-end;
       width: 30%;
    }
+
    .todo_input {
-      border: 1px solid var(--green );
+      border: 1px solid var(--green);
    }
 }

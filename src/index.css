@@ -8,13 +8,14 @@
   font-family: 'Russo One', sans-serif;
 
 }
+
 :root {
   --peach: #f7dfd7;
   --orange: #ff7461;
   --green: #b2d198;
   --white: #fff;
   --grey: #f6fafb;
-  --blue : #62b4fe;
+  --blue: #62b4fe;
 }
 
 .flex {
