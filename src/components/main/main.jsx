@@ -1,38 +1,22 @@
 import { useState } from "react";
 import "./main.css";
-import { v4 as uuid } from "uuid";
 import Task from "./Task";
 import InputTask from "./InputTask";
 
 const Main = () => {
-  const [inputValue, setInputValue] = useState("");
   const [myTodoItems, setTodoItems] = useState([]);
 
-  const newTAsk = (e) => {
-    setInputValue(e.target.value);
-  };
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    const newTodo = {
-      id: uuid(),
-      title: inputValue,
-    };
-    setTodoItems((prevTodoItems) => [...prevTodoItems, newTodo]);
-    setInputValue("");
+  const handleSubmit = (newTask) => {
+    setTodoItems((prevTodoItems) => [...prevTodoItems, newTask]);
   };
 
   return (
     <main className="main_container">
-      <InputTask
-        value={inputValue}
-        onChange={newTAsk}
-        onSubmit={handleSubmit}
-      />
+      <InputTask onSubmit={handleSubmit} />
       {myTodoItems.length > 0 && (
         <div className="flex margin column primary_container">
-          {myTodoItems.map((todo) => (
-            <Task key={todo.id} {...todo} />
+          {myTodoItems.map(({ title, id }) => (
+            <Task key={id} title={title} />
           ))}
         </div>
       )}

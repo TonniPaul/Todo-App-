@@ -1,21 +1,36 @@
-import React from "react";
+import React, { useState } from "react";
+import { v4 as uuid } from "uuid";
 
-const InputTask = ({ value, onChange, onSubmit }) => {
+const InputTask = ({ onSubmit }) => {
+  const [inputValue, setInputValue] = useState("");
+
+  const handleInputChange = (e) => {
+    setInputValue(e.target.value);
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const newTask = {
+      id: uuid(),
+      title: inputValue,
+    };
+    onSubmit(newTask);
+    setInputValue("");
+  };
+
   return (
     <div>
-      <form className="flex primary_container" onSubmit={onSubmit}>
+      <form className="flex primary_container" onSubmit={handleSubmit}>
         <input
           type="text"
           name="todo_item"
           id="todo_item"
-          value={value}
-          onChange={onChange}
+          value={inputValue}
+          onChange={handleInputChange}
           placeholder="Input Task"
           className="todo_input"
         />
-        <button type="submit" className="btn pointer">
-          Add Task
-        </button>
+        <button className="btn pointer">Add Task</button>
       </form>
     </div>
   );
