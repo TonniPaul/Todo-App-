@@ -64,7 +64,7 @@ input::placeholder {
    text-transform: capitalize;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 908px) {
    .main_container {
       width: 90%;
    }
