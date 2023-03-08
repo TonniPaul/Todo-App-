@@ -1,32 +1,25 @@
+import { useState } from "react";
 import "./main.css";
+import Task from "./Task";
+import InputTask from "./InputTask";
 
 const Main = () => {
+  const [myTodoItems, setTodoItems] = useState([]);
+
+  const handleSubmit = (newTask) => {
+    setTodoItems((prevTodoItems) => [...prevTodoItems, newTask]);
+  };
+
   return (
     <main className="main_container">
-      <form className="flex primary_container">
-        <input
-          type="text"
-          name="todo_item"
-          id="todo_item"
-          placeholder="Your todo goes here"
-          className="todo_input"
-        />
-        <button type="submit" className="btn">
-          Add Todo
-        </button>
-      </form>
-
-      <div className="flex margin-top primary_container">
-        <div className="primary_container todo_items">
-          <div> Complete my task </div>
-          <div>
-            <i className="fa-solid fa-check pointer completed"></i>
-          </div>
-          <div>
-            <i className="fa-solid fa-trash-can pointer delete"></i>
-          </div>
+      <InputTask onSubmit={handleSubmit} />
+      {myTodoItems.length > 0 && (
+        <div className="flex margin column primary_container">
+          {myTodoItems.map(({ title, id }) => (
+            <Task key={id} title={title} />
+          ))}
         </div>
-      </div>
+      )}
     </main>
   );
 };
