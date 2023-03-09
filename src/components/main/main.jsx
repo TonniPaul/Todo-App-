@@ -16,7 +16,6 @@ const Main = () => {
         item.id === taskId ? { ...item, title: newTitle } : item
       )
     );
-    console.log(myTodoItems);
   };
 
   return (
@@ -25,7 +24,12 @@ const Main = () => {
       {myTodoItems.length > 0 && (
         <div className="flex margin column primary_container">
           {myTodoItems.map(({ title, id }) => (
-            <Task key={id} title={title} handleEditSubmit={handleEdit} />
+            <Task
+              key={id}
+              taskId={id}
+              title={title}
+              handleEditSubmit={handleEdit}
+            />
           ))}
         </div>
       )}

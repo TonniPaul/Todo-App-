@@ -3,7 +3,9 @@
    margin: auto;
    margin-top: 20px;
 }
-
+input {
+   background: inherit;
+}
 .primary_container {
    width: 100%;
    gap: 20px;
@@ -40,25 +42,37 @@
    align-items: center;
 }
 
-.completed {
+.green {
    color: green;
-   border-radius: 50%;
    padding: 5px;
 }
+
 .edit-form {
+   display: flex;
+   justify-content: space-between;
    padding: 0;
    border: none;
+   display: flex;
+   width: 100%;
 }
 
 .edit {
    color: var(--blue);
 }
+.edit-input-container {
+   display: flex;
+   width: 100%;
+}
+.edit-input-btn {
+   gap: 10px;
+}
+
 
 input::placeholder {
    color: #ccc;
 }
 
-.delete {
+.red {
    color: red;
    padding: 5px;
 
@@ -68,9 +82,13 @@ input::placeholder {
    text-transform: capitalize;
 }
 
-.save-btn {
+.save-btn,
+.cancel-btn {
    width: max-content;
+   padding: 5px;
 }
+
+
 @media (max-width: 908px) {
    .main_container {
       width: 90%;
@@ -90,4 +108,7 @@ input::placeholder {
    .todo_input {
       border: 1px solid var(--green);
    }
+   .edit-input {
+   border: none;
+}
 }
