@@ -1,11 +1,14 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 
-const Task = ({ title, handleEditSubmit, taskId }) => {
+const Task = ({ title, handleEditSubmit, taskId, handleDeletedTask }) => {
   const [isEditing, setEditing] = useState(false);
   const [editedTitle, setEditedTitle] = useState(title);
 
-  const handelEdit = () => {
+  const inputFocus = useRef();
+
+  const handleEdit = () => {
     setEditing(true);
+    inputFocus.current.focus();
   };
 
   const handleNewTitle = (e) => {
@@ -23,6 +26,10 @@ const Task = ({ title, handleEditSubmit, taskId }) => {
     setEditedTitle(title);
   };
 
+  const handleDelete = () => {
+    handleDeletedTask(taskId);
+  };
+
   return (
     <div className="primary_container todo_items">
       <form className=" flex primary_container edit-form" onSubmit={handleSave}>
@@ -34,7 +41,8 @@ const Task = ({ title, handleEditSubmit, taskId }) => {
             className="todo_input edit-input"
             value={isEditing ? editedTitle : title}
             onChange={handleNewTitle}
-            readOnly={isEditing ? false : true}
+            readOnly={!isEditing}
+            ref={inputFocus}
           />
           {isEditing && (
             <div className="flex action-btn">
@@ -50,16 +58,13 @@ const Task = ({ title, handleEditSubmit, taskId }) => {
       </form>
       {!isEditing && (
         <div className="flex action-btn">
-          <button className="task">
-            <i
-              className="fa-solid fa-pen pointer edit"
-              onClick={handelEdit}
-            ></i>
+          <button className="task" onClick={handleEdit}>
+            <i className="fa-solid fa-pen pointer edit"></i>
           </button>
           <button className="task">
             <i className="fa-solid fa-check pointer green"></i>
           </button>
-          <button className="task">
+          <button className="task" onClick={handleDelete}>
             <i className="fa-solid fa-trash-can pointer red"></i>
           </button>
         </div>
