@@ -3,9 +3,11 @@
    margin: auto;
    margin-top: 20px;
 }
+
 input {
    background: inherit;
 }
+
 .primary_container {
    width: 100%;
    gap: 20px;
@@ -58,15 +60,23 @@ input {
 
 .edit {
    color: var(--blue);
+   padding: 5px;
 }
+
 .edit-input-container {
    display: flex;
    width: 100%;
 }
-.edit-input-btn {
+
+.action-btn {
    gap: 10px;
 }
 
+.action-btn button {
+   border: 1px solid #ccc;
+   background: none;
+   border-radius: 5px;
+}
 
 input::placeholder {
    color: #ccc;
@@ -108,7 +118,8 @@ input::placeholder {
    .todo_input {
       border: 1px solid var(--green);
    }
+
    .edit-input {
-   border: none;
-}
+      border: none;
+   }
 }

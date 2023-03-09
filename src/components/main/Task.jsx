@@ -25,11 +25,7 @@ const Task = ({ title, handleEditSubmit, taskId }) => {
 
   return (
     <div className="primary_container todo_items">
-      <form
-        action=""
-        className=" flex primary_container edit-form"
-        onSubmit={handleSave}
-      >
+      <form className=" flex primary_container edit-form" onSubmit={handleSave}>
         <div className="edit-input-container">
           <input
             type="text"
@@ -38,10 +34,10 @@ const Task = ({ title, handleEditSubmit, taskId }) => {
             className="todo_input edit-input"
             value={isEditing ? editedTitle : title}
             onChange={handleNewTitle}
-            disabled={isEditing ? false : true}
+            readOnly={isEditing ? false : true}
           />
           {isEditing && (
-            <div className="flex edit-input-btn">
+            <div className="flex action-btn">
               <button className="pointer save-btn">
                 <i className="fa-solid fa-floppy-disk pointer green"></i>
               </button>
@@ -53,16 +49,21 @@ const Task = ({ title, handleEditSubmit, taskId }) => {
         </div>
       </form>
       {!isEditing && (
-        <p className="task">
-          <i className="fa-solid fa-pen pointer edit" onClick={handelEdit}></i>
-        </p>
+        <div className="flex action-btn">
+          <button className="task">
+            <i
+              className="fa-solid fa-pen pointer edit"
+              onClick={handelEdit}
+            ></i>
+          </button>
+          <button className="task">
+            <i className="fa-solid fa-check pointer green"></i>
+          </button>
+          <button className="task">
+            <i className="fa-solid fa-trash-can pointer red"></i>
+          </button>
+        </div>
       )}
-      <p className="task">
-        <i className="fa-solid fa-check pointer green"></i>
-      </p>
-      <p className="task">
-        <i className="fa-solid fa-trash-can pointer red"></i>
-      </p>
     </div>
   );
 };
