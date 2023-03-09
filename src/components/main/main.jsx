@@ -24,24 +24,34 @@ const Main = () => {
     );
   };
 
-  return (
-    <main className="main_container">
-      <InputTask onSubmit={handleSubmit} />
-      {myTodoItems.length > 0 && (
-        <div className="flex margin column primary_container">
-          {myTodoItems.map(({ title, id }) => (
-            <Task
-              key={id}
-              taskId={id}
-              title={title}
-              handleEditSubmit={handleEdit}
-              handleDeletedTask={handleDelete}
-            />
-          ))}
-        </div>
-      )}
-    </main>
-  );
+
+const handleComplete = (taskId, isComplete) => {
+  setTodoItems((prevTodoItems) => {
+    return prevTodoItems.map((item) =>
+      item.id === taskId ? { ...item, completed: isComplete } : item
+    );
+  });
+};
+
+return (
+  <main className="main_container">
+    <InputTask onSubmit={handleSubmit} />
+    {myTodoItems.length > 0 && (
+      <div className="flex margin column primary_container">
+        {myTodoItems.map(({ title, id }) => (
+          <Task
+            key={id}
+            taskId={id}
+            title={title}
+            handleEditSubmit={handleEdit}
+            handleDeletedTask={handleDelete}
+            handleCompletionToggle={handleComplete}
+          />
+        ))}
+      </div>
+    )}
+  </main>
+);
 };
 
 export default Main;

@@ -16,6 +16,7 @@ const InputTask = ({ onSubmit }) => {
     const newTask = {
       id: uuid(),
       title: inputValue,
+      completed: false,
     };
     onSubmit(newTask);
     setInputValue("");
