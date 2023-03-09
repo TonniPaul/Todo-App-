@@ -38,7 +38,7 @@ const Task = ({
   };
 
   const handleCompletedTask = () => {
-    setComplete((previousState) => !previousState);
+    setComplete(!isComplete);
     handleCompletionToggle(taskId, isComplete);
   };
 
