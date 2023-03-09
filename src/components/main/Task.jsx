@@ -1,8 +1,15 @@
 import React, { useRef, useState } from "react";
 
-const Task = ({ title, handleEditSubmit, taskId, handleDeletedTask }) => {
+const Task = ({
+  title,
+  handleEditSubmit,
+  taskId,
+  handleDeletedTask,
+  handleCompletionToggle,
+}) => {
   const [isEditing, setEditing] = useState(false);
   const [editedTitle, setEditedTitle] = useState(title);
+  const [isComplete, setComplete] = useState(false);
 
   const inputFocus = useRef();
 
@@ -30,6 +37,11 @@ const Task = ({ title, handleEditSubmit, taskId, handleDeletedTask }) => {
     handleDeletedTask(taskId);
   };
 
+  const handleCompletedTask = () => {
+    setComplete((previousState) => !previousState);
+    handleCompletionToggle(taskId, isComplete);
+  };
+
   return (
     <div className="primary_container todo_items">
       <form className=" flex primary_container edit-form" onSubmit={handleSave}>
@@ -43,6 +55,11 @@ const Task = ({ title, handleEditSubmit, taskId, handleDeletedTask }) => {
             onChange={handleNewTitle}
             readOnly={!isEditing}
             ref={inputFocus}
+            style={{
+              textDecoration: isComplete && !isEditing && "line-through",
+              color: isComplete && !isEditing && "#ccc",
+              fontStyle: isComplete && !isEditing && "italic",
+            }}
           />
           {isEditing && (
             <div className="flex action-btn">
@@ -61,8 +78,12 @@ const Task = ({ title, handleEditSubmit, taskId, handleDeletedTask }) => {
           <button className="task" onClick={handleEdit}>
             <i className="fa-solid fa-pen pointer edit"></i>
           </button>
-          <button className="task">
-            <i className="fa-solid fa-check pointer green"></i>
+          <button className="task" onClick={handleCompletedTask}>
+            {!isComplete ? (
+              <i className="fa-solid fa-check pointer green"></i>
+            ) : (
+              <i className="fa-solid fa-arrows-rotate pointer green"></i>
+            )}
           </button>
           <button className="task" onClick={handleDelete}>
             <i className="fa-solid fa-trash-can pointer red"></i>
