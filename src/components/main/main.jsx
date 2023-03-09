@@ -18,6 +18,12 @@ const Main = () => {
     );
   };
 
+  const handleDelete = (taskId) => {
+    setTodoItems((prevTodoItems) =>
+      prevTodoItems.filter((item) => item.id !== taskId)
+    );
+  };
+
   return (
     <main className="main_container">
       <InputTask onSubmit={handleSubmit} />
@@ -29,6 +35,7 @@ const Main = () => {
               taskId={id}
               title={title}
               handleEditSubmit={handleEdit}
+              handleDeletedTask={handleDelete}
             />
           ))}
         </div>
