@@ -10,13 +10,26 @@ const Main = () => {
     setTodoItems((prevTodoItems) => [...prevTodoItems, newTask]);
   };
 
+  const handleEdit = (taskId, newTitle) => {
+    setTodoItems((prevTodoItems) =>
+      prevTodoItems.map((item) =>
+        item.id === taskId ? { ...item, title: newTitle } : item
+      )
+    );
+  };
+
   return (
     <main className="main_container">
       <InputTask onSubmit={handleSubmit} />
       {myTodoItems.length > 0 && (
         <div className="flex margin column primary_container">
           {myTodoItems.map(({ title, id }) => (
-            <Task key={id} title={title} />
+            <Task
+              key={id}
+              taskId={id}
+              title={title}
+              handleEditSubmit={handleEdit}
+            />
           ))}
         </div>
       )}
