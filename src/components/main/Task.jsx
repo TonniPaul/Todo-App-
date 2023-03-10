@@ -61,7 +61,7 @@ const Task = ({
               fontStyle: isComplete && !isEditing && "italic",
             }}
           />
-          {isEditing && (
+          {isEditing && !isComplete &&(
             <div className="flex action-btn">
               <button className="pointer save-btn">
                 <i className="fa-solid fa-floppy-disk pointer green"></i>
@@ -75,9 +75,9 @@ const Task = ({
       </form>
       {!isEditing && (
         <div className="flex action-btn">
-          <button className="task" onClick={handleEdit}>
+          {!isComplete && <button className="task" onClick={handleEdit}>
             <i className="fa-solid fa-pen pointer edit"></i>
-          </button>
+          </button>}
           <button className="task" onClick={handleCompletedTask}>
             {!isComplete ? (
               <i className="fa-solid fa-check pointer green"></i>
