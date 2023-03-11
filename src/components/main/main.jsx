@@ -25,13 +25,6 @@ const Main = () => {
   };
 
 
-const handleComplete = (taskId, isComplete) => {
-  setTodoItems((prevTodoItems) => {
-    return prevTodoItems.map((item) =>
-      item.id === taskId ? { ...item, completed: isComplete } : item
-    );
-  });
-};
 
 return (
   <main className="main_container">
@@ -45,7 +38,6 @@ return (
             title={title}
             handleEditSubmit={handleEdit}
             handleDeletedTask={handleDelete}
-            handleCompletionToggle={handleComplete}
           />
         ))}
       </div>

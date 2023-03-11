@@ -98,6 +98,11 @@ input::placeholder {
    padding: 5px;
 }
 
+.completed-task {
+   text-decoration: line-through;
+   color: #ccc;
+   font-style: italic;
+}
 
 @media (max-width: 908px) {
    .main_container {

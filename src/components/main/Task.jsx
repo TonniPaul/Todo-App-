@@ -5,7 +5,6 @@ const Task = ({
   handleEditSubmit,
   taskId,
   handleDeletedTask,
-  handleCompletionToggle,
 }) => {
   const [isEditing, setEditing] = useState(false);
   const [editedTitle, setEditedTitle] = useState(title);
@@ -39,7 +38,6 @@ const Task = ({
 
   const handleCompletedTask = () => {
     setComplete(!isComplete);
-    handleCompletionToggle(taskId, isComplete);
   };
 
   return (
@@ -50,18 +48,15 @@ const Task = ({
             type="text"
             name="editedTitle"
             id="editedTitle"
-            className="todo_input edit-input"
+            className={`todo_input edit-input ${
+              isComplete && "completed-task"
+            }`}
             value={isEditing ? editedTitle : title}
             onChange={handleNewTitle}
             readOnly={!isEditing}
             ref={inputFocus}
-            style={{
-              textDecoration: isComplete && !isEditing && "line-through",
-              color: isComplete && !isEditing && "#ccc",
-              fontStyle: isComplete && !isEditing && "italic",
-            }}
           />
-          {isEditing && !isComplete &&(
+          {isEditing && !isComplete && (
             <div className="flex action-btn">
               <button className="pointer save-btn">
                 <i className="fa-solid fa-floppy-disk pointer green"></i>
@@ -75,9 +70,11 @@ const Task = ({
       </form>
       {!isEditing && (
         <div className="flex action-btn">
-          {!isComplete && <button className="task" onClick={handleEdit}>
-            <i className="fa-solid fa-pen pointer edit"></i>
-          </button>}
+          {!isComplete && (
+            <button className="task" onClick={handleEdit}>
+              <i className="fa-solid fa-pen pointer edit"></i>
+            </button>
+          )}
           <button className="task" onClick={handleCompletedTask}>
             {!isComplete ? (
               <i className="fa-solid fa-check pointer green"></i>
