@@ -88,9 +88,9 @@ const handleSave = (e) => {
               <i className="fa-solid fa-arrows-rotate pointer green"></i>
             )}
           </button>
-          <button className="task" onClick={handleDelete}>
+          {!isComplete && <button className="task" onClick={handleDelete}>
             <i className="fa-solid fa-trash-can pointer red"></i>
-          </button>
+          </button>}
         </div>
       )}
     </div>
