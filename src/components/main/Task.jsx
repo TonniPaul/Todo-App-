@@ -2,10 +2,8 @@ import React, { useRef, useState } from "react";
 
 const Task = ({
   title,
-  handleEditSubmit,
   taskId,
-  handleDeletedTask,
-  handleCompletionToggle,
+  setMyTodoItems
 }) => {
   const [isEditing, setEditing] = useState(false);
   const [editedTitle, setEditedTitle] = useState(title);
@@ -22,24 +20,28 @@ const Task = ({
     setEditedTitle(e.target.value);
   };
 
-  const handleSave = (e) => {
-    e.preventDefault();
-    setEditing(false);
-    handleEditSubmit(taskId, editedTitle);
-  };
+const handleSave = (e) => {
+  e.preventDefault();
+  setEditing(false);
+  setMyTodoItems((prev) => prev.map((item) =>
+    item.id === taskId ? { ...item, title: editedTitle } : item
+  ))
+  
+};
+
 
   const handleCancel = () => {
     setEditing(false);
     setEditedTitle(title);
   };
 
-  const handleDelete = () => {
-    handleDeletedTask(taskId);
-  };
+ const handleDelete = () => {
+   setMyTodoItems((prev) => prev.filter((item) => item.id !== taskId));
+ };
+
 
   const handleCompletedTask = () => {
     setComplete(!isComplete);
-    handleCompletionToggle(taskId, isComplete);
   };
 
   return (
@@ -50,18 +52,15 @@ const Task = ({
             type="text"
             name="editedTitle"
             id="editedTitle"
-            className="todo_input edit-input"
+            className={`todo_input edit-input ${
+              isComplete && "completed-task"
+            }`}
             value={isEditing ? editedTitle : title}
             onChange={handleNewTitle}
             readOnly={!isEditing}
             ref={inputFocus}
-            style={{
-              textDecoration: isComplete && !isEditing && "line-through",
-              color: isComplete && !isEditing && "#ccc",
-              fontStyle: isComplete && !isEditing && "italic",
-            }}
           />
-          {isEditing && !isComplete &&(
+          {isEditing && !isComplete && (
             <div className="flex action-btn">
               <button className="pointer save-btn">
                 <i className="fa-solid fa-floppy-disk pointer green"></i>
@@ -75,9 +74,11 @@ const Task = ({
       </form>
       {!isEditing && (
         <div className="flex action-btn">
-          {!isComplete && <button className="task" onClick={handleEdit}>
-            <i className="fa-solid fa-pen pointer edit"></i>
-          </button>}
+          {!isComplete && (
+            <button className="task" onClick={handleEdit}>
+              <i className="fa-solid fa-pen pointer edit"></i>
+            </button>
+          )}
           <button className="task" onClick={handleCompletedTask}>
             {!isComplete ? (
               <i className="fa-solid fa-check pointer green"></i>
@@ -85,9 +86,9 @@ const Task = ({
               <i className="fa-solid fa-arrows-rotate pointer green"></i>
             )}
           </button>
-          <button className="task" onClick={handleDelete}>
+          {!isComplete && <button className="task" onClick={handleDelete}>
             <i className="fa-solid fa-trash-can pointer red"></i>
-          </button>
+          </button>}
         </div>
       )}
     </div>
