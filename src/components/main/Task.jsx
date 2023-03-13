@@ -3,8 +3,6 @@ import React, { useRef, useState } from "react";
 const Task = ({
   title,
   taskId,
-  todoItems,
-  handleTodoItemsChange,
   setMyTodoItems
 }) => {
   const [isEditing, setEditing] = useState(false);
