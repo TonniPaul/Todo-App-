@@ -10,19 +10,9 @@ const Main = () => {
     setTodoItems((prevTodoItems) => [...prevTodoItems, newTask]);
   };
 
-  const handleEdit = (taskId, newTitle) => {
-    setTodoItems((prevTodoItems) =>
-      prevTodoItems.map((item) =>
-        item.id === taskId ? { ...item, title: newTitle } : item
-      )
-    );
-  };
-
-  const handleDelete = (taskId) => {
-    setTodoItems((prevTodoItems) =>
-      prevTodoItems.filter((item) => item.id !== taskId)
-    );
-  };
+const handleTodoItemsChange = (updatedTodoItems) => {
+  setTodoItems(updatedTodoItems);
+};
 
 
 
@@ -34,10 +24,10 @@ return (
         {myTodoItems.map(({ title, id }) => (
           <Task
             key={id}
-            taskId={id}
             title={title}
-            handleEditSubmit={handleEdit}
-            handleDeletedTask={handleDelete}
+            taskId={id}
+            todoItems={myTodoItems}
+            handleTodoItemsChange={handleTodoItemsChange}
           />
         ))}
       </div>

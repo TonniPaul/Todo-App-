@@ -2,9 +2,9 @@ import React, { useRef, useState } from "react";
 
 const Task = ({
   title,
-  handleEditSubmit,
   taskId,
-  handleDeletedTask,
+  todoItems,
+  handleTodoItemsChange,
 }) => {
   const [isEditing, setEditing] = useState(false);
   const [editedTitle, setEditedTitle] = useState(title);
@@ -21,20 +21,26 @@ const Task = ({
     setEditedTitle(e.target.value);
   };
 
-  const handleSave = (e) => {
-    e.preventDefault();
-    setEditing(false);
-    handleEditSubmit(taskId, editedTitle);
-  };
+const handleSave = (e) => {
+  e.preventDefault();
+  setEditing(false);
+  const updatedTodoItems = todoItems.map((item) =>
+    item.id === taskId ? { ...item, title: editedTitle } : item
+  );
+  handleTodoItemsChange(updatedTodoItems);
+};
+
 
   const handleCancel = () => {
     setEditing(false);
     setEditedTitle(title);
   };
 
-  const handleDelete = () => {
-    handleDeletedTask(taskId);
-  };
+ const handleDelete = () => {
+   const updatedTodoItems = todoItems.filter((item) => item.id !== taskId);
+   handleTodoItemsChange(updatedTodoItems);
+ };
+
 
   const handleCompletedTask = () => {
     setComplete(!isComplete);
