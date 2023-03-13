@@ -5,6 +5,7 @@ const Task = ({
   taskId,
   todoItems,
   handleTodoItemsChange,
+  setMyTodoItems
 }) => {
   const [isEditing, setEditing] = useState(false);
   const [editedTitle, setEditedTitle] = useState(title);
@@ -24,10 +25,10 @@ const Task = ({
 const handleSave = (e) => {
   e.preventDefault();
   setEditing(false);
-  const updatedTodoItems = todoItems.map((item) =>
+  setMyTodoItems((prev) => prev.map((item) =>
     item.id === taskId ? { ...item, title: editedTitle } : item
-  );
-  handleTodoItemsChange(updatedTodoItems);
+  ))
+  
 };
 
 
@@ -37,8 +38,7 @@ const handleSave = (e) => {
   };
 
  const handleDelete = () => {
-   const updatedTodoItems = todoItems.filter((item) => item.id !== taskId);
-   handleTodoItemsChange(updatedTodoItems);
+   setMyTodoItems((prev) => prev.filter((item) => item.id !== taskId));
  };
 
 

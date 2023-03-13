@@ -4,17 +4,11 @@ import Task from "./Task";
 import InputTask from "./InputTask";
 
 const Main = () => {
-  const [myTodoItems, setTodoItems] = useState([]);
+  const [myTodoItems, setMyTodoItems] = useState([]);
 
   const handleSubmit = (newTask) => {
-    setTodoItems((prevTodoItems) => [...prevTodoItems, newTask]);
+    setMyTodoItems((prevTodoItems) => [...prevTodoItems, newTask]);
   };
-
-const handleTodoItemsChange = (updatedTodoItems) => {
-  setTodoItems(updatedTodoItems);
-};
-
-
 
 return (
   <main className="main_container">
@@ -26,8 +20,7 @@ return (
             key={id}
             title={title}
             taskId={id}
-            todoItems={myTodoItems}
-            handleTodoItemsChange={handleTodoItemsChange}
+            setMyTodoItems={setMyTodoItems}
           />
         ))}
       </div>
