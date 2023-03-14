@@ -1,10 +1,6 @@
-import React, { useRef, useState } from "react";
+import React, {  useRef, useState } from "react";
 
-const Task = ({
-  title,
-  taskId,
-  setMyTodoItems
-}) => {
+const Task = ({ title, taskId, setMyTodoItems }) => {
   const [isEditing, setEditing] = useState(false);
   const [editedTitle, setEditedTitle] = useState(title);
   const [isComplete, setComplete] = useState(false);
@@ -20,28 +16,40 @@ const Task = ({
     setEditedTitle(e.target.value);
   };
 
-const handleSave = (e) => {
-  e.preventDefault();
-  setEditing(false);
-  setMyTodoItems((prev) => prev.map((item) =>
-    item.id === taskId ? { ...item, title: editedTitle } : item
-  ))
-  
-};
-
+  const handleSave = (e) => {
+    e.preventDefault();
+    setEditing(false);
+    setMyTodoItems((prev) => {
+      const updatedItems = prev.map((item) =>
+        item.id === taskId ? { ...item, title: editedTitle } : item
+      );
+      localStorage.setItem("myTodoItems", JSON.stringify(updatedItems));
+      return updatedItems;
+    });
+  };
 
   const handleCancel = () => {
     setEditing(false);
     setEditedTitle(title);
   };
 
- const handleDelete = () => {
-   setMyTodoItems((prev) => prev.filter((item) => item.id !== taskId));
- };
-
+  const handleDelete = () => {
+    setMyTodoItems((prev) => {
+      const updatedItems = prev.filter((item) => item.id !== taskId);
+      localStorage.setItem("myTodoItems", JSON.stringify(updatedItems));
+      return updatedItems;
+    });
+  };
 
   const handleCompletedTask = () => {
     setComplete(!isComplete);
+    setMyTodoItems((prev) => {
+      const updatedItems = prev.map((item) =>
+        item.id === taskId ? { ...item, completed: !isComplete } : item
+      );
+      localStorage.setItem("myTodoItems", JSON.stringify(updatedItems));
+      return updatedItems;
+    });
   };
 
   return (
@@ -86,9 +94,11 @@ const handleSave = (e) => {
               <i className="fa-solid fa-arrows-rotate pointer green"></i>
             )}
           </button>
-          {!isComplete && <button className="task" onClick={handleDelete}>
-            <i className="fa-solid fa-trash-can pointer red"></i>
-          </button>}
+          {!isComplete && (
+            <button className="task" onClick={handleDelete}>
+              <i className="fa-solid fa-trash-can pointer red"></i>
+            </button>
+          )}
         </div>
       )}
     </div>
