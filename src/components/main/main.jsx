@@ -26,12 +26,13 @@ const Main = () => {
       <InputTask onSubmit={handleSubmit} />
       {myTodoItems.length > 0 && (
         <div className="flex margin column primary_container">
-          {myTodoItems.map(({ title, id }) => (
+          {myTodoItems.map(({ title, id, completed }) => (
             <Task
               key={id}
               title={title}
               taskId={id}
               setMyTodoItems={setMyTodoItems}
+              completed = {completed}
             />
           ))}
         </div>
