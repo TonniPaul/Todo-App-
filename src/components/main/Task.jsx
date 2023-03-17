@@ -22,7 +22,6 @@ const Task = ({ title, taskId, setMyTodoItems,myTodoItems, completed }) => {
       const updatedItems = prev.map((item) =>
         item.id === taskId ? { ...item, title: editedTitle } : item
       );
-      localStorage.setItem("myTodoItems", JSON.stringify(updatedItems));
       return updatedItems;
     });
   };
@@ -35,7 +34,6 @@ const Task = ({ title, taskId, setMyTodoItems,myTodoItems, completed }) => {
   const handleDelete = () => {
     setMyTodoItems((prev) => {
       const updatedItems = prev.filter((item) => item.id !== taskId);
-      localStorage.setItem("myTodoItems", JSON.stringify(updatedItems));
       return updatedItems;
     });
   };
@@ -45,7 +43,6 @@ const Task = ({ title, taskId, setMyTodoItems,myTodoItems, completed }) => {
       const updatedItems = prev.map((item) =>
         item.id === taskId ? { ...item, completed: !completed } : item
       );
-      localStorage.setItem("myTodoItems", JSON.stringify(updatedItems));
       return updatedItems;
     });
   };

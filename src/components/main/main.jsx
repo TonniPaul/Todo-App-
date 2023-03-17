@@ -3,8 +3,13 @@ import "./main.css";
 import Task from "./Task";
 import InputTask from "./InputTask";
 
+const getData = () => {
+  const savedTodoItems = JSON.parse(localStorage.getItem("myTodoItems"));
+  return savedTodoItems ? savedTodoItems : [];
+};
+
 const Main = () => {
-  const [myTodoItems, setMyTodoItems] = useState([]);
+  const [myTodoItems, setMyTodoItems] = useState(() => getData());
 
   const handleSubmit = (newTask) => {
     setMyTodoItems((prevTodoItems) => [...prevTodoItems, newTask]);
@@ -15,11 +20,8 @@ const Main = () => {
   };
 
   useEffect(() => {
-    const savedTodoItems = JSON.parse(localStorage.getItem("myTodoItems"));
-    if (savedTodoItems) {
-      setMyTodoItems(savedTodoItems);
-    }
-  }, []);
+    localStorage.setItem("myTodoItems", JSON.stringify(myTodoItems));
+  }, [myTodoItems]);
 
   return (
     <main className="main_container">
@@ -32,7 +34,7 @@ const Main = () => {
               title={title}
               taskId={id}
               setMyTodoItems={setMyTodoItems}
-              completed = {completed}
+              completed={completed}
             />
           ))}
         </div>
