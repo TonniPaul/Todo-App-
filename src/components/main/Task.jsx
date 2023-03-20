@@ -1,13 +1,8 @@
-import React, { useRef, useState } from "react";
+import React, {  useRef, useState } from "react";
 
-const Task = ({
-  title,
-  taskId,
-  setMyTodoItems
-}) => {
+const Task = ({ title, taskId, setMyTodoItems,myTodoItems, completed }) => {
   const [isEditing, setEditing] = useState(false);
   const [editedTitle, setEditedTitle] = useState(title);
-  const [isComplete, setComplete] = useState(false);
 
   const inputFocus = useRef();
 
@@ -20,28 +15,36 @@ const Task = ({
     setEditedTitle(e.target.value);
   };
 
-const handleSave = (e) => {
-  e.preventDefault();
-  setEditing(false);
-  setMyTodoItems((prev) => prev.map((item) =>
-    item.id === taskId ? { ...item, title: editedTitle } : item
-  ))
-  
-};
-
+  const handleSave = (e) => {
+    e.preventDefault();
+    setEditing(false);
+    setMyTodoItems((prev) => {
+      const updatedItems = prev.map((item) =>
+        item.id === taskId ? { ...item, title: editedTitle } : item
+      );
+      return updatedItems;
+    });
+  };
 
   const handleCancel = () => {
     setEditing(false);
     setEditedTitle(title);
   };
 
- const handleDelete = () => {
-   setMyTodoItems((prev) => prev.filter((item) => item.id !== taskId));
- };
-
+  const handleDelete = () => {
+    setMyTodoItems((prev) => {
+      const updatedItems = prev.filter((item) => item.id !== taskId);
+      return updatedItems;
+    });
+  };
 
   const handleCompletedTask = () => {
-    setComplete(!isComplete);
+    setMyTodoItems((prev) => {
+      const updatedItems = prev.map((item) =>
+        item.id === taskId ? { ...item, completed: !completed } : item
+      );
+      return updatedItems;
+    });
   };
 
   return (
@@ -53,14 +56,14 @@ const handleSave = (e) => {
             name="editedTitle"
             id="editedTitle"
             className={`todo_input edit-input ${
-              isComplete && "completed-task"
+              completed && "completed-task"
             }`}
             value={isEditing ? editedTitle : title}
             onChange={handleNewTitle}
             readOnly={!isEditing}
             ref={inputFocus}
           />
-          {isEditing && !isComplete && (
+          {isEditing && !completed && (
             <div className="flex action-btn">
               <button className="pointer save-btn">
                 <i className="fa-solid fa-floppy-disk pointer green"></i>
@@ -74,21 +77,23 @@ const handleSave = (e) => {
       </form>
       {!isEditing && (
         <div className="flex action-btn">
-          {!isComplete && (
+          {!completed && (
             <button className="task" onClick={handleEdit}>
               <i className="fa-solid fa-pen pointer edit"></i>
             </button>
           )}
           <button className="task" onClick={handleCompletedTask}>
-            {!isComplete ? (
+            {!completed ? (
               <i className="fa-solid fa-check pointer green"></i>
             ) : (
               <i className="fa-solid fa-arrows-rotate pointer green"></i>
             )}
           </button>
-          {!isComplete && <button className="task" onClick={handleDelete}>
-            <i className="fa-solid fa-trash-can pointer red"></i>
-          </button>}
+          {!completed && (
+            <button className="task" onClick={handleDelete}>
+              <i className="fa-solid fa-trash-can pointer red"></i>
+            </button>
+          )}
         </div>
       )}
     </div>
