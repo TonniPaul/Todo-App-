@@ -13,10 +13,6 @@ const Main = () => {
 
   const handleSubmit = (newTask) => {
     setMyTodoItems((prevTodoItems) => [...prevTodoItems, newTask]);
-    localStorage.setItem(
-      "myTodoItems",
-      JSON.stringify([...myTodoItems, newTask])
-    );
   };
 
   useEffect(() => {
